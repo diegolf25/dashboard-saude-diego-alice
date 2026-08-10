@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projeto Saúde Diego e Alice | Dashboard MVP</title>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-
   <style>
     :root {
       --bg: #f8f9fa;
@@ -24,7 +22,6 @@
       --warning: #ffc107;
       --danger: #dc3545;
     }
-
     body.dark {
       --bg: #101318;
       --card: #1b2027;
@@ -32,9 +29,7 @@
       --muted: #adb5bd;
       --border: #2b3035;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       background: var(--bg);
@@ -42,12 +37,10 @@
       font-family: "Segoe UI", Roboto, Arial, sans-serif;
       min-height: 100vh;
     }
-
     .layout {
       display: flex;
       min-height: 100vh;
     }
-
     .sidebar {
       width: 260px;
       min-height: 100vh;
@@ -60,7 +53,6 @@
       padding: 22px 16px;
       transition: transform .25s ease;
     }
-
     .brand {
       display: flex;
       align-items: center;
@@ -69,12 +61,10 @@
       font-weight: 700;
       font-size: 1.15rem;
     }
-
     .brand i {
       color: #ff6b6b;
       font-size: 1.4rem;
     }
-
     .sidebar a {
       display: flex;
       align-items: center;
@@ -86,23 +76,19 @@
       margin-bottom: 6px;
       transition: .2s;
     }
-
     .sidebar a:hover,
     .sidebar a.active {
       background: var(--sidebar-hover);
       color: white;
     }
-
     .sidebar a.disabled {
       opacity: .45;
       cursor: not-allowed;
     }
-
     .sidebar a.disabled:hover {
       background: none;
       color: #adb5bd;
     }
-
     .badge-soon {
       margin-left: auto;
       font-size: .62rem;
@@ -112,10 +98,8 @@
       text-transform: uppercase;
       letter-spacing: .03em;
     }
-
     .view-section { display: none; }
     .view-section.active { display: block; }
-
     .person-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -123,7 +107,6 @@
       padding: 18px;
       box-shadow: 0 2px 12px rgba(0,0,0,.06);
     }
-
     .person-card h5 {
       font-weight: 750;
       margin-bottom: 14px;
@@ -131,44 +114,36 @@
       align-items: center;
       gap: 8px;
     }
-
     .person-card .avatar-dot {
       width: 12px;
       height: 12px;
       border-radius: 50%;
       display: inline-block;
     }
-
     .bio-kpi {
       text-align: center;
       padding: 8px 4px;
     }
-
     .bio-kpi .bio-label {
       font-size: .78rem;
       color: var(--muted);
       margin-bottom: 2px;
     }
-
     .bio-kpi .bio-value {
       font-size: 1.35rem;
       font-weight: 750;
       margin: 0;
     }
-
     .bio-kpi .bio-delta {
       font-size: .78rem;
       font-weight: 600;
     }
-
     .bio-delta.pos { color: var(--danger); }
     .bio-delta.neg { color: var(--success); }
     .bio-delta.neutro { color: var(--muted); }
-
     .measures-table th, .measures-table td {
       font-size: .85rem;
     }
-
     .status-badge {
       display: inline-block;
       padding: 4px 10px;
@@ -181,14 +156,12 @@
     .status-badge.danger { background: rgba(220,53,69,.12); color: var(--danger); }
     .status-badge.neutral { background: rgba(108,117,125,.14); color: var(--muted); }
     .status-badge.info { background: rgba(13,110,253,.12); color: var(--primary); }
-
     .empty-state {
       text-align: center;
       color: var(--muted);
       padding: 40px 16px;
     }
     .empty-state i { opacity: .5; }
-
     .meta-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -221,13 +194,11 @@
     .body-goal-box .bg-label { font-size: .75rem; color: var(--muted); }
     .body-goal-box .bg-value { font-size: 1.1rem; font-weight: 750; margin: 2px 0; }
     .body-goal-box .bg-target { font-size: .75rem; color: var(--muted); }
-
     .main {
       margin-left: 260px;
       width: calc(100% - 260px);
       padding: 24px;
     }
-
     .topbar {
       background: var(--card);
       border: 1px solid var(--border);
@@ -236,16 +207,13 @@
       box-shadow: 0 2px 12px rgba(0,0,0,.05);
       margin-bottom: 20px;
     }
-
     .subtitle { color: var(--muted); margin: 0; }
-
     .upload-box {
       border: 1px dashed #ced4da;
       border-radius: 14px;
       background: rgba(13,110,253,.04);
       padding: 14px;
     }
-
     .kpi-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -254,31 +222,25 @@
       transition: .2s;
       min-height: 122px;
     }
-
     .kpi-card:hover { transform: translateY(-4px); }
-
     .kpi-label {
       font-size: .92rem;
       color: var(--muted);
       margin-bottom: 4px;
     }
-
     .kpi-value {
       margin: 0;
       font-size: 1.9rem;
       font-weight: 750;
       color: var(--text);
     }
-
     body.dark .kpi-value {
       color: #ffffff;
     }
-
     .kpi-icon {
       font-size: 2.2rem;
       opacity: .16;
     }
-
     .chart-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -287,19 +249,16 @@
       box-shadow: 0 2px 12px rgba(0,0,0,.06);
       min-height: 380px;
     }
-
     .chart-title {
       font-size: 1rem;
       font-weight: 700;
       margin-bottom: 16px;
     }
-
     .chart-wrap {
       position: relative;
       height: 300px;
       width: 100%;
     }
-
     .status-pill {
       display: inline-flex;
       align-items: center;
@@ -311,9 +270,7 @@
       font-weight: 600;
       font-size: .85rem;
     }
-
     .mobile-toggle { display: none; }
-
     @media (max-width: 991px) {
       .sidebar { transform: translateX(-100%); }
       .sidebar.open { transform: translateX(0); }
@@ -340,7 +297,6 @@
       <hr class="border-secondary my-4" />
       <small class="text-secondary">MVP local com leitura de Excel</small>
     </aside>
-
     <main class="main">
       <div class="topbar">
         <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center">
@@ -366,7 +322,6 @@
           </div>
         </div>
       </div>
-
       <div class="row g-3 mb-4">
         <div class="col-md-4 col-lg-3">
           <label class="form-label small text-muted">Pessoa</label>
@@ -380,11 +335,13 @@
             <option value="Todos">Todos</option>
           </select>
         </div>
-        <div class="col-md-4 col-lg-6 d-flex align-items-end justify-content-md-end">
+        <div class="col-md-4 col-lg-6 d-flex flex-column align-items-end justify-content-md-end gap-1">
           <span class="status-pill" id="statusCarga"><i class="fa-solid fa-circle-info"></i> Aguardando planilha</span>
+          <a href="#" id="linkLimparCache" class="text-muted small" style="display:none;" title="Remove os dados salvos automaticamente neste navegador">
+            <i class="fa-solid fa-trash-can"></i> Limpar dados salvos localmente
+          </a>
         </div>
       </div>
-
       <div id="view-geral" class="view-section active">
       <div class="row g-3 mb-4">
         <div class="col-sm-6 col-xl-3">
@@ -420,7 +377,6 @@
           </div>
         </div>
       </div>
-
       <div class="row g-4">
         <div class="col-lg-8">
           <div class="chart-card">
@@ -448,10 +404,8 @@
         </div>
       </div>
       </div>
-
       <div id="view-treinos" class="view-section">
         <div class="row g-3 mb-4" id="kpiTreinos"></div>
-
         <div class="row g-3 mb-4">
           <div class="col-md-6 col-lg-4">
             <label class="form-label small text-muted">Categoria</label>
@@ -468,7 +422,6 @@
             </select>
           </div>
         </div>
-
         <div class="row g-4 mb-4">
           <div class="col-lg-6">
             <div class="chart-card">
@@ -483,7 +436,6 @@
             </div>
           </div>
         </div>
-
         <div class="chart-card" style="min-height:auto;">
           <div class="chart-title"><i class="fa-solid fa-list-check text-primary me-2"></i>Histórico de treinos</div>
           <div class="table-responsive" style="max-height:420px;">
@@ -499,10 +451,8 @@
           </div>
         </div>
       </div>
-
       <div id="view-planosemanal" class="view-section">
         <div class="row g-3 mb-4" id="kpiPlanoSemanal"></div>
-
         <div class="row g-3 mb-4">
           <div class="col-md-6 col-lg-4">
             <label class="form-label small text-muted">Semana</label>
@@ -517,7 +467,6 @@
             </select>
           </div>
         </div>
-
         <div class="chart-card" style="min-height:auto;">
           <div class="chart-title"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Agenda planejada</div>
           <div class="table-responsive" style="max-height:480px;">
@@ -533,7 +482,6 @@
           </div>
         </div>
       </div>
-
       <div id="view-metas" class="view-section">
         <div class="row g-3 mb-2">
           <div class="col-12">
@@ -542,7 +490,6 @@
         </div>
         <div id="metasContainer"></div>
       </div>
-
       <div id="view-habitos" class="view-section">
         <div class="row g-3 mb-2">
           <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
@@ -550,7 +497,6 @@
             <span class="status-pill" id="statusSalvamentoHabitos" style="display:none;"></span>
           </div>
         </div>
-
         <div class="row g-3 mb-4 align-items-end">
           <div class="col-md-4 col-lg-3">
             <label class="form-label small text-muted">Data do checklist</label>
@@ -562,9 +508,7 @@
             </button>
           </div>
         </div>
-
         <div class="row g-3 mb-4" id="kpiHabitos"></div>
-
         <div class="row g-4 mb-4">
           <div class="col-lg-6">
             <div class="chart-card">
@@ -579,13 +523,10 @@
             </div>
           </div>
         </div>
-
         <div class="row g-4" id="checklistHabitosContainer"></div>
       </div>
-
       <div id="view-exames" class="view-section">
         <div class="row g-3 mb-4" id="kpiExames"></div>
-
         <div class="row g-3 mb-4">
           <div class="col-md-6 col-lg-4">
             <label class="form-label small text-muted">Status do exame</label>
@@ -594,7 +535,6 @@
             </select>
           </div>
         </div>
-
         <div class="chart-card" style="min-height:auto;">
           <div class="chart-title"><i class="fa-solid fa-flask-vial text-primary me-2"></i>Resultados de exames</div>
           <div class="table-responsive" style="max-height:480px;">
@@ -610,18 +550,15 @@
           </div>
         </div>
       </div>
-
       <div id="view-evolucao" class="view-section">
         <div class="row g-3 mb-2">
           <div class="col-12">
             <span class="status-pill" id="statusBio"><i class="fa-solid fa-circle-info"></i> Aguardando planilha (aba Bioimpedância)</span>
           </div>
         </div>
-
         <div class="row g-3 mb-4" id="kpiBioimpedancia">
           <!-- Cartões por pessoa são gerados dinamicamente via JS -->
         </div>
-
         <div class="row g-4 mb-4">
           <div class="col-lg-6">
             <div class="chart-card">
@@ -648,7 +585,6 @@
             </div>
           </div>
         </div>
-
         <div class="row g-4">
           <div class="col-12">
             <div class="chart-card" style="min-height: auto;">
@@ -677,7 +613,6 @@
       </div>
     </main>
   </div>
-
   <script>
     let atividades = [];
     let bioimpedancia = [];
@@ -686,7 +621,6 @@
     let exames = [];
     let habitosCatalogo = [];
     let habitosRegistro = [];
-
     // Estado necessario para persistir alteracoes de volta na planilha Excel
     let workbookAtual = null;
     let arquivoHandle = null; // FileSystemFileHandle (quando o navegador suporta edicao direta)
@@ -705,7 +639,6 @@
     let chartCaloriasCategoria = null;
     let chartRankingHabitos = null;
     let chartAderenciaHabitos = null;
-
     const CORES_PESSOA = {
       "diego": "#0d6efd",
       "alice": "#dc3545"
@@ -716,12 +649,9 @@
       const paleta = ["#6f42c1", "#198754", "#ffc107", "#20c997", "#fd7e14"];
       return paleta[indice % paleta.length];
     }
-
     const meses = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-
     const el = (id) => document.getElementById(id);
     const fmt = (n) => Number(n || 0).toLocaleString("pt-BR");
-
     // Converte um valor de data (objeto Date ou string/serial) em uma chave estável para
     // deduplicação (Set/agrupamento). Necessário porque, com `raw: true`, cada célula de data
     // gera uma instância própria de Date - duas datas iguais em valor não são "===" entre si,
@@ -731,7 +661,6 @@
       const d = new Date(v);
       return isNaN(d) ? String(v) : d.getTime();
     }
-
     function normalizarTexto(valor) {
       return String(valor ?? "")
         .normalize("NFD")
@@ -739,7 +668,6 @@
         .toLowerCase()
         .trim();
     }
-
     function valor(row, aliases) {
       const keys = Object.keys(row || {});
       for (const alias of aliases) {
@@ -749,25 +677,25 @@
       }
       return undefined;
     }
-
     function numero(row, aliases) {
       const v = valor(row, aliases);
       if (v === undefined || v === null || v === "") return 0;
       if (typeof v === "number") return v;
       return Number(String(v).replace("%", "").replace(".", "").replace(",", ".")) || 0;
     }
-
     function setStatus(texto, tipo = "info") {
       const cores = { info: "#0d6efd", ok: "#198754", erro: "#dc3545", alerta: "#ffc107" };
       el("statusCarga").style.color = cores[tipo] || cores.info;
       el("statusCarga").innerHTML = `<i class="fa-solid fa-circle-info"></i> ${texto}`;
     }
-
     el("btnMenu").addEventListener("click", () => el("sidebar").classList.toggle("open"));
     el("btnDark").addEventListener("click", () => document.body.classList.toggle("dark"));
     el("excelFile").addEventListener("change", carregarArquivo);
     el("btnConectarArquivo").addEventListener("click", selecionarArquivoComEdicaoDireta);
-
+    el("linkLimparCache").addEventListener("click", (evento) => {
+      evento.preventDefault();
+      limparCacheLocal();
+    });
     // Ajusta o botao de edicao direta conforme suporte do navegador a File System Access API.
     if (!("showOpenFilePicker" in window)) {
       const btn = el("btnConectarArquivo");
@@ -787,24 +715,19 @@
     }
     el("filtroPessoa").addEventListener("change", atualizarSecaoAtiva);
     el("filtroAno").addEventListener("change", atualizarSecaoAtiva);
-
     el("filtroDataHabitos")?.addEventListener("change", atualizarHabitos);
     el("btnBaixarPlanilhaHabitos")?.addEventListener("click", baixarPlanilhaAtualizada);
-
     // Navegacao entre secoes do dashboard (Visao Geral, Treinos, Plano Semanal, Metas, Exames, Evolucao).
     document.querySelectorAll(".nav-link").forEach(link => {
       link.addEventListener("click", (evento) => {
         evento.preventDefault();
         if (link.classList.contains("disabled")) return;
-
         document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
         link.classList.add("active");
-
         const destino = link.dataset.view;
         document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
         const secaoDestino = el(`view-${destino}`);
         if (secaoDestino) secaoDestino.classList.add("active");
-
         if (destino === "evolucao") atualizarEvolucao();
         if (destino === "treinos") atualizarTreinos();
         if (destino === "planosemanal") atualizarPlanoSemanal();
@@ -814,7 +737,6 @@
         if (window.innerWidth < 992) el("sidebar").classList.remove("open");
       });
     });
-
     ["filtroCategoriaTreino", "filtroStatusTreino"].forEach(id => {
       el(id)?.addEventListener("change", atualizarTreinos);
     });
@@ -822,7 +744,6 @@
       el(id)?.addEventListener("change", atualizarPlanoSemanal);
     });
     el("filtroStatusExame")?.addEventListener("change", atualizarExames);
-
     // Cabecalhos esperados por aba (usados para localizar a linha real do cabecalho,
     // ja que a planilha traz linhas de titulo/instrucao antes da tabela de dados).
     const CABECALHOS_ATIVIDADES = ["data", "pessoa", "categoria", "duracao_min", "concluido"];
@@ -832,7 +753,6 @@
     const CABECALHOS_EXAMES = ["data_exame", "pessoa", "exame", "resultado", "status"];
     const CABECALHOS_HABITOS = ["pessoa", "habito", "categoria", "meta_diaria", "unidade"];
     const CABECALHOS_HABITOS_REG = ["data", "pessoa", "habito", "realizado"];
-
     function encontrarLinhaCabecalho(linhas, cabecalhosEsperados) {
       let melhorIndice = 0;
       let melhorPontuacao = -1;
@@ -848,7 +768,6 @@
       }
       return { indice: melhorIndice, pontuacao: melhorPontuacao };
     }
-
     function linhasParaObjetos(linhas, indiceCabecalho) {
       const cabecalho = (linhas[indiceCabecalho] || []).map(c => String(c ?? "").trim());
       const objetos = [];
@@ -865,7 +784,6 @@
       }
       return objetos;
     }
-
     async function carregarArquivo(event) {
       const arquivo = event.target.files?.[0];
       if (!arquivo) return;
@@ -873,44 +791,42 @@
       nomeArquivoAtual = arquivo.name || nomeArquivoAtual;
       await processarArquivoCarregado(arquivo);
     }
-
     async function processarArquivoCarregado(arquivo) {
+      const buffer = await arquivo.arrayBuffer();
+      await processarBufferPlanilha(buffer);
+    }
+
+    // Núcleo do processamento da planilha, compartilhado entre o upload manual (input file),
+    // a conexão para edição direta (File System Access API) e a restauração automática do
+    // cache local (localStorage) ao reabrir a página.
+    async function processarBufferPlanilha(buffer) {
       try {
-        const buffer = await arquivo.arrayBuffer();
         const workbook = XLSX.read(buffer, { type: "array", cellDates: true });
         workbookAtual = workbook;
         const aba = workbook.Sheets["Atividades"];
-
         if (!aba) {
           setStatus("Aba Atividades não encontrada", "erro");
           alert("Aba 'Atividades' não encontrada no Excel.");
           return;
         }
-
         // Le a aba como matriz bruta (linha a linha) em vez de assumir que a linha 1 e o cabecalho,
         // pois a planilha traz linhas de titulo/instrucao antes da tabela real de dados.
         const linhas = XLSX.utils.sheet_to_json(aba, { header: 1, raw: true, defval: "", blankrows: false });
-
         const { indice: indiceCabecalho, pontuacao } = encontrarLinhaCabecalho(linhas, CABECALHOS_ATIVIDADES);
-
         if (pontuacao <= 0) {
           setStatus("Não localizei o cabeçalho esperado na aba Atividades", "erro");
           alert("Não encontrei colunas como 'Data', 'Pessoa', 'Categoria' na aba Atividades. Confira o arquivo.");
           return;
         }
-
         atividades = linhasParaObjetos(linhas, indiceCabecalho)
           .filter(row => String(valor(row, ["Data"]) ?? "").trim() !== "");
-
         if (!atividades.length) {
           setStatus("Aba Atividades está vazia", "alerta");
           return;
         }
-
         popularFiltros();
         atualizarDashboard();
         setStatus(`${atividades.length} registros carregados`, "ok");
-
         // Demais abas (Bioimpedancia, Plano_Semanal, Metas, Exames, Habitos) - carregamento
         // independente e tolerante a falhas, para nao impedir a leitura da aba Atividades caso
         // alguma delas esteja ausente ou com estrutura diferente.
@@ -919,10 +835,94 @@
         carregarMetas(workbook);
         carregarExames(workbook);
         carregarHabitos(workbook);
+
+        // Salva o último arquivo carregado no navegador (localStorage), para que os dados
+        // continuem disponíveis automaticamente da próxima vez que o dashboard for aberto.
+        salvarCacheLocal();
       } catch (erro) {
         console.error(erro);
         setStatus("Erro ao ler o arquivo", "erro");
         alert("Não consegui ler o arquivo Excel. Confira se ele está salvo em .xlsx ou .xls.");
+      }
+    }
+    // ===== Persistência local do último arquivo carregado (localStorage) =====
+    // Guarda o workbook inteiro (em base64) no navegador, para que o dashboard reabra já
+    // preenchido com os últimos dados carregados, sem precisar selecionar o arquivo de novo.
+    const CHAVE_CACHE_LOCAL = "dashboardSaude_ultimoArquivo_v1";
+
+    function arrayBufferParaBase64(buffer) {
+      let binario = "";
+      const bytes = new Uint8Array(buffer);
+      const tamanhoBloco = 0x8000;
+      for (let i = 0; i < bytes.length; i += tamanhoBloco) {
+        binario += String.fromCharCode.apply(null, bytes.subarray(i, i + tamanhoBloco));
+      }
+      return btoa(binario);
+    }
+
+    function base64ParaArrayBuffer(base64) {
+      const binario = atob(base64);
+      const bytes = new Uint8Array(binario.length);
+      for (let i = 0; i < binario.length; i++) bytes[i] = binario.charCodeAt(i);
+      return bytes.buffer;
+    }
+
+    function salvarCacheLocal() {
+      if (!workbookAtual) return;
+      try {
+        const arrayBuffer = XLSX.write(workbookAtual, { bookType: "xlsx", type: "array" });
+        const payload = {
+          nome: nomeArquivoAtual,
+          dataHoraISO: new Date().toISOString(),
+          base64: arrayBufferParaBase64(arrayBuffer)
+        };
+        localStorage.setItem(CHAVE_CACHE_LOCAL, JSON.stringify(payload));
+      } catch (erro) {
+        // Falha silenciosa (ex.: quota de armazenamento excedida) - não deve travar a UI.
+        console.warn("Não foi possível salvar o cache local da planilha:", erro);
+      }
+    }
+
+    function limparCacheLocal() {
+      try {
+        localStorage.removeItem(CHAVE_CACHE_LOCAL);
+      } catch (erro) {
+        console.warn("Não foi possível limpar o cache local:", erro);
+      }
+      const link = el("linkLimparCache");
+      if (link) link.style.display = "none";
+      setStatus("Dados salvos localmente foram removidos. Carregue uma planilha para começar.", "info");
+    }
+
+    async function tentarRestaurarCacheLocal() {
+      let cache;
+      try {
+        const bruto = localStorage.getItem(CHAVE_CACHE_LOCAL);
+        if (!bruto) return;
+        cache = JSON.parse(bruto);
+      } catch (erro) {
+        console.warn("Cache local corrompido, ignorando:", erro);
+        return;
+      }
+      if (!cache || !cache.base64) return;
+
+      try {
+        const buffer = base64ParaArrayBuffer(cache.base64);
+        nomeArquivoAtual = cache.nome || nomeArquivoAtual;
+        arquivoHandle = null; // restaurado do cache; sem handle gravável até reconectar
+        await processarBufferPlanilha(buffer);
+
+        const dataFormatada = cache.dataHoraISO
+          ? new Date(cache.dataHoraISO).toLocaleString("pt-BR")
+          : "";
+        setStatus(
+          `Dados restaurados do último arquivo carregado ("${cache.nome}"${dataFormatada ? ", salvo em " + dataFormatada : ""}). Para voltar a salvar automaticamente na planilha, clique em "Conectar p/ edição direta".`,
+          "info"
+        );
+        const link = el("linkLimparCache");
+        if (link) link.style.display = "";
+      } catch (erro) {
+        console.error("Falha ao restaurar cache local:", erro);
       }
     }
 
@@ -952,7 +952,6 @@
         if (erro?.name !== "AbortError") console.error(erro);
       }
     }
-
     function carregarBioimpedancia(workbook) {
       const aba = workbook.Sheets["Bioimpedancia"];
       if (!aba) {
@@ -960,31 +959,25 @@
         setStatusBio("Aba Bioimpedância não encontrada", "erro");
         return;
       }
-
       const linhas = XLSX.utils.sheet_to_json(aba, { header: 1, raw: true, defval: "", blankrows: false });
       const { indice: indiceCabecalho, pontuacao } = encontrarLinhaCabecalho(linhas, CABECALHOS_BIOIMPEDANCIA);
-
       if (pontuacao <= 0) {
         bioimpedancia = [];
         setStatusBio("Não localizei o cabeçalho esperado na aba Bioimpedância", "erro");
         return;
       }
-
       bioimpedancia = linhasParaObjetos(linhas, indiceCabecalho)
         .filter(row => String(valor(row, ["Data"]) ?? "").trim() !== "")
         .map(row => ({ ...row, __dataObj: new Date(valor(row, ["Data"])) }))
         .sort((a, b) => a.__dataObj - b.__dataObj);
-
       if (!bioimpedancia.length) {
         setStatusBio("Aba Bioimpedância está vazia", "alerta");
         atualizarEvolucao();
         return;
       }
-
       setStatusBio(`${bioimpedancia.length} registros de bioimpedância carregados`, "ok");
       atualizarEvolucao();
     }
-
     function setStatusBio(texto, tipo = "info") {
       const cores = { info: "#0d6efd", ok: "#198754", erro: "#dc3545", alerta: "#ffc107" };
       const badge = el("statusBio");
@@ -992,7 +985,6 @@
       badge.style.color = cores[tipo] || cores.info;
       badge.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${texto}`;
     }
-
     function setStatusGenerico(idBadge, texto, tipo = "info") {
       const cores = { info: "#0d6efd", ok: "#198754", erro: "#dc3545", alerta: "#ffc107" };
       const badge = el(idBadge);
@@ -1000,22 +992,16 @@
       badge.style.color = cores[tipo] || cores.info;
       badge.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${texto}`;
     }
-
     function carregarAbaGenerica(workbook, nomeAba, cabecalhosEsperados) {
       const aba = workbook.Sheets[nomeAba];
       if (!aba) return { linhas: [], erro: `Aba ${nomeAba} não encontrada` };
-
       const linhasBrutas = XLSX.utils.sheet_to_json(aba, { header: 1, raw: true, defval: "", blankrows: false });
       const { indice, pontuacao } = encontrarLinhaCabecalho(linhasBrutas, cabecalhosEsperados);
-
       if (pontuacao <= 0) return { linhas: [], erro: `Cabeçalho não localizado na aba ${nomeAba}` };
-
       const objetos = linhasParaObjetos(linhasBrutas, indice)
         .filter(row => Object.values(row).some(v => String(v ?? "").trim() !== ""));
-
       return { linhas: objetos, erro: null };
     }
-
     function carregarPlanoSemanal(workbook) {
       const { linhas, erro } = carregarAbaGenerica(workbook, "Plano_Semanal", CABECALHOS_PLANO);
       planoSemanal = linhas.map(row => ({ ...row, __dataObj: new Date(valor(row, ["Data"])) }))
@@ -1024,7 +1010,6 @@
       popularFiltrosPlano();
       if (el("view-planosemanal")?.classList.contains("active")) atualizarPlanoSemanal();
     }
-
     function carregarMetas(workbook) {
       const { linhas } = carregarAbaGenerica(workbook, "Metas", CABECALHOS_METAS);
       metas = linhas;
@@ -1035,7 +1020,6 @@
       }
       if (el("view-metas")?.classList.contains("active")) atualizarMetas();
     }
-
     function carregarExames(workbook) {
       const { linhas } = carregarAbaGenerica(workbook, "Exames", CABECALHOS_EXAMES);
       exames = linhas.map(row => ({
@@ -1046,12 +1030,10 @@
       popularFiltroExames();
       if (el("view-exames")?.classList.contains("active")) atualizarExames();
     }
-
     function carregarHabitos(workbook) {
       // Aba "Habitos" (catalogo estatico - nao e reescrita pelo dashboard).
       const { linhas: catalogo } = carregarAbaGenerica(workbook, "Habitos", CABECALHOS_HABITOS);
       habitosCatalogo = catalogo.filter(row => normalizarTexto(valor(row, ["Ativo"])) !== "nao");
-
       // Aba "Habitos_Registro" (log diario - reescrita ao marcar o checklist).
       const aba = workbook.Sheets["Habitos_Registro"];
       if (!aba) {
@@ -1061,10 +1043,8 @@
         if (el("view-habitos")?.classList.contains("active")) atualizarHabitos();
         return;
       }
-
       const linhasBrutas = XLSX.utils.sheet_to_json(aba, { header: 1, raw: true, defval: "", blankrows: false });
       const { indice, pontuacao } = encontrarLinhaCabecalho(linhasBrutas, CABECALHOS_HABITOS_REG);
-
       if (pontuacao <= 0) {
         habitosRegistro = [];
         cabecalhoOriginalHabitosReg = null;
@@ -1072,38 +1052,30 @@
         if (el("view-habitos")?.classList.contains("active")) atualizarHabitos();
         return;
       }
-
       // Guarda as linhas de titulo/cabecalho originais para reconstruir a aba ao salvar.
       indiceCabecalhoHabitosReg = indice;
       cabecalhoOriginalHabitosReg = linhasBrutas.slice(0, indice + 1);
-
       habitosRegistro = linhasParaObjetos(linhasBrutas, indice)
         .filter(row => String(valor(row, ["Data"]) ?? "").trim() !== "")
         .map(row => ({ ...row, __dataObj: new Date(valor(row, ["Data"])) }))
         .filter(row => !isNaN(row.__dataObj));
-
       if (!habitosCatalogo.length) {
         setStatusGenerico("statusHabitos", "Aba Habitos (catálogo) não encontrada ou vazia", "erro");
       } else {
         setStatusGenerico("statusHabitos", `${habitosCatalogo.length} hábitos cadastrados · ${habitosRegistro.length} registros carregados`, "ok");
       }
-
       popularFiltroDataHabitos();
       if (el("view-habitos")?.classList.contains("active")) atualizarHabitos();
     }
-
     function popularFiltros() {
       const pessoas = [...new Set(atividades.map(x => valor(x, ["Pessoa"])))]
         .filter(Boolean)
         .sort((a,b) => String(a).localeCompare(String(b), "pt-BR"));
-
       const anos = [...new Set(atividades.map(x => valor(x, ["Ano"])))]
         .filter(Boolean)
         .sort((a,b) => Number(a) - Number(b));
-
       el("filtroPessoa").innerHTML = '<option value="Todos">Todos</option>' + pessoas.map(p => `<option value="${p}">${p}</option>`).join("");
       el("filtroAno").innerHTML = '<option value="Todos">Todos</option>' + anos.map(a => `<option value="${a}">${a}</option>`).join("");
-
       const categorias = [...new Set(atividades.map(x => valor(x, ["Categoria"])))]
         .filter(Boolean)
         .sort((a,b) => String(a).localeCompare(String(b), "pt-BR"));
@@ -1111,10 +1083,8 @@
         el("filtroCategoriaTreino").innerHTML = '<option value="Todos">Todas</option>' + categorias.map(c => `<option value="${c}">${c}</option>`).join("");
       }
     }
-
     function popularFiltrosPlano() {
       if (!el("filtroSemana")) return;
-
       // Deduplica pela chave estável (timestamp) e guarda uma data de exemplo por chave,
       // já que objetos Date iguais em valor não são "===" entre si (ver função chaveData).
       const semanasMap = new Map();
@@ -1127,14 +1097,12 @@
       const semanasOrdenadas = [...semanasMap.entries()].sort((a, b) => a[0] - b[0]);
       el("filtroSemana").innerHTML = '<option value="Todos">Todas</option>' +
         semanasOrdenadas.map(([chave, dataSemana]) => `<option value="${chave}">Semana de ${formatarData(new Date(dataSemana))}</option>`).join("");
-
       const statusList = [...new Set(planoSemanal.map(x => valor(x, ["Status"])))]
         .filter(Boolean)
         .sort((a,b) => String(a).localeCompare(String(b), "pt-BR"));
       el("filtroStatusPlano").innerHTML = '<option value="Todos">Todos</option>' +
         statusList.map(s => `<option value="${s}">${s}</option>`).join("");
     }
-
     function popularFiltroExames() {
       if (!el("filtroStatusExame")) return;
       const statusList = [...new Set(exames.map(x => valor(x, ["Status"])))]
@@ -1143,66 +1111,53 @@
       el("filtroStatusExame").innerHTML = '<option value="Todos">Todos</option>' +
         statusList.map(s => `<option value="${s}">${s}</option>`).join("");
     }
-
     function filtrarDados() {
       let dados = [...atividades];
       const pessoa = el("filtroPessoa").value;
       const ano = el("filtroAno").value;
-
       if (pessoa !== "Todos") dados = dados.filter(x => String(valor(x, ["Pessoa"])) === pessoa);
       if (ano !== "Todos") dados = dados.filter(x => String(valor(x, ["Ano"])) === ano);
-
       return dados;
     }
-
     function atualizarDashboard() {
       const dados = filtrarDados();
       const concluidos = dados.filter(x => normalizarTexto(valor(x, ["Concluído", "Concluido"])) === "sim");
-
       const diasAtivos = new Set(concluidos.map(x => chaveData(valor(x, ["Data"])))).size;
       const minutos = concluidos.reduce((a,b) => a + numero(b, ["Duração_min", "Duracao_min", "Duração", "Duracao"]), 0);
       const calorias = concluidos.reduce((a,b) => a + numero(b, ["Calorias"]), 0);
       const somaDor = concluidos.reduce((a,b) => a + numero(b, ["Dor/Desconforto_0a10", "Dor_Desconforto_0a10", "Dor"]), 0);
       const mediaDor = concluidos.length ? (somaDor / concluidos.length).toFixed(1) : "0";
-
       el("diasAtivos").textContent = fmt(diasAtivos);
       el("minutos").textContent = fmt(minutos);
       el("calorias").textContent = fmt(calorias);
       el("dorMedia").textContent = mediaDor;
-
       gerarGraficos(concluidos);
     }
-
     function gerarGraficos(dados) {
       const minutosMes = new Array(12).fill(0);
       const dorSomaMes = new Array(12).fill(0);
       const dorQtdMes = new Array(12).fill(0);
       const categorias = {};
       const intensidades = {};
-
       dados.forEach(item => {
         const mes = Math.min(Math.max((numero(item, ["Mês", "Mes"]) || 1) - 1, 0), 11);
         const min = numero(item, ["Duração_min", "Duracao_min", "Duração", "Duracao"]);
         const dor = numero(item, ["Dor/Desconforto_0a10", "Dor_Desconforto_0a10", "Dor"]);
         const categoria = valor(item, ["Categoria"]) || "Sem categoria";
         const intensidade = valor(item, ["Intensidade"]) || "Não informado";
-
         minutosMes[mes] += min;
         dorSomaMes[mes] += dor;
         dorQtdMes[mes] += 1;
         categorias[categoria] = (categorias[categoria] || 0) + 1;
         intensidades[intensidade] = (intensidades[intensidade] || 0) + 1;
       });
-
       const dorMediaMes = dorSomaMes.map((s, i) => dorQtdMes[i] ? +(s / dorQtdMes[i]).toFixed(1) : 0);
-
       const commonOptions = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { position: "bottom" } },
         scales: { y: { beginAtZero: true } }
       };
-
       if (chartLinha) chartLinha.destroy();
       chartLinha = new Chart(el("graficoEvolucao"), {
         type: "line",
@@ -1221,7 +1176,6 @@
         },
         options: commonOptions
       });
-
       if (chartPizza) chartPizza.destroy();
       chartPizza = new Chart(el("graficoCategoria"), {
         type: "doughnut",
@@ -1234,7 +1188,6 @@
         },
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
       });
-
       if (chartIntensidade) chartIntensidade.destroy();
       chartIntensidade = new Chart(el("graficoIntensidade"), {
         type: "bar",
@@ -1250,7 +1203,6 @@
         },
         options: commonOptions
       });
-
       if (chartDor) chartDor.destroy();
       chartDor = new Chart(el("graficoDor"), {
         type: "line",
@@ -1270,25 +1222,19 @@
         options: { ...commonOptions, scales: { y: { beginAtZero: true, max: 10 } } }
       });
     }
-
     // ===== Seção Evolução (Bioimpedância) =====
-
     function formatarData(dataObj) {
       if (!(dataObj instanceof Date) || isNaN(dataObj)) return "-";
       return dataObj.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
     }
-
     function filtrarBioimpedancia() {
       let dados = [...bioimpedancia];
       const pessoa = el("filtroPessoa").value;
       const ano = el("filtroAno").value;
-
       if (pessoa !== "Todos") dados = dados.filter(x => String(valor(x, ["Pessoa"])) === pessoa);
       if (ano !== "Todos") dados = dados.filter(x => String(x.__dataObj.getFullYear()) === String(ano));
-
       return dados;
     }
-
     function ultimoRegistroPorPessoa(dados) {
       const porPessoa = {};
       dados.forEach(item => {
@@ -1299,7 +1245,6 @@
       Object.keys(porPessoa).forEach(p => porPessoa[p].sort((a, b) => a.__dataObj - b.__dataObj));
       return porPessoa;
     }
-
     function renderizarBioDelta(atual, primeiro, decimais = 1, inverterCores = false) {
       if (primeiro === null || primeiro === undefined || atual === primeiro) {
         return `<span class="bio-delta neutro"><i class="fa-solid fa-minus"></i> estável</span>`;
@@ -1310,10 +1255,8 @@
       const seta = positivo ? "fa-arrow-up" : "fa-arrow-down";
       return `<span class="bio-delta ${classe}"><i class="fa-solid ${seta}"></i> ${positivo ? "+" : ""}${diff.toFixed(decimais)}</span>`;
     }
-
     function atualizarEvolucao() {
       if (!el("kpiBioimpedancia")) return;
-
       if (!bioimpedancia.length) {
         el("kpiBioimpedancia").innerHTML = `
           <div class="col-12">
@@ -1326,16 +1269,13 @@
         el("tabelaMedidas").querySelector("tbody").innerHTML = "";
         return;
       }
-
       const dados = filtrarBioimpedancia();
       const porPessoa = ultimoRegistroPorPessoa(dados);
       const pessoas = Object.keys(porPessoa).sort((a, b) => a.localeCompare(b, "pt-BR"));
-
       renderizarKpiCards(porPessoa, pessoas);
       renderizarGraficosEvolucao(porPessoa, pessoas);
       renderizarTabelaMedidas(porPessoa, pessoas);
     }
-
     function renderizarKpiCards(porPessoa, pessoas) {
       if (!pessoas.length) {
         el("kpiBioimpedancia").innerHTML = `
@@ -1346,15 +1286,12 @@
           </div>`;
         return;
       }
-
       const colClass = pessoas.length === 1 ? "col-12" : "col-md-6";
-
       el("kpiBioimpedancia").innerHTML = pessoas.map((pessoa, idx) => {
         const registros = porPessoa[pessoa];
         const atual = registros[registros.length - 1];
         const primeiro = registros[0];
         const cor = corPessoa(pessoa, idx);
-
         const pesoAtual = numero(atual, ["Peso_kg", "Peso"]);
         const pesoPrimeiro = numero(primeiro, ["Peso_kg", "Peso"]);
         const imcAtual = numero(atual, ["IMC"]);
@@ -1363,7 +1300,6 @@
         const gordPrimeiro = numero(primeiro, ["Gordura_%", "Gordura"]);
         const magraAtual = numero(atual, ["Massa_Magra_kg", "Massa_Magra"]);
         const magraPrimeiro = numero(primeiro, ["Massa_Magra_kg", "Massa_Magra"]);
-
         return `
         <div class="${colClass}">
           <div class="person-card">
@@ -1394,7 +1330,6 @@
         </div>`;
       }).join("");
     }
-
     function renderizarGraficosEvolucao(porPessoa, pessoas) {
       const commonOptions = {
         responsive: true,
@@ -1403,12 +1338,10 @@
         scales: { y: { beginAtZero: false } },
         interaction: { mode: "index", intersect: false }
       };
-
       // Une todas as datas de todas as pessoas para formar um eixo X comum, ordenado cronologicamente.
       const datasUnicas = [...new Set(pessoas.flatMap(p => porPessoa[p].map(r => r.__dataObj.getTime())))]
         .sort((a, b) => a - b);
       const labels = datasUnicas.map(t => formatarData(new Date(t)));
-
       function montarDatasets(campoAliases) {
         return pessoas.map((pessoa, idx) => {
           const cor = corPessoa(pessoa, idx);
@@ -1426,28 +1359,24 @@
           };
         });
       }
-
       if (chartPeso) chartPeso.destroy();
       chartPeso = new Chart(el("graficoPeso"), {
         type: "line",
         data: { labels, datasets: montarDatasets(["Peso_kg", "Peso"]) },
         options: commonOptions
       });
-
       if (chartImc) chartImc.destroy();
       chartImc = new Chart(el("graficoImc"), {
         type: "line",
         data: { labels, datasets: montarDatasets(["IMC"]) },
         options: commonOptions
       });
-
       if (chartGordura) chartGordura.destroy();
       chartGordura = new Chart(el("graficoGordura"), {
         type: "line",
         data: { labels, datasets: montarDatasets(["Gordura_%", "Gordura"]) },
         options: commonOptions
       });
-
       if (chartMassaMagra) chartMassaMagra.destroy();
       chartMassaMagra = new Chart(el("graficoMassaMagra"), {
         type: "line",
@@ -1455,7 +1384,6 @@
         options: commonOptions
       });
     }
-
     function renderizarTabelaMedidas(porPessoa, pessoas) {
       const linhas = pessoas.map(pessoa => {
         const registros = porPessoa[pessoa];
@@ -1473,13 +1401,10 @@
           <td>${numero(r, ["Quadril_cm", "Quadril"]).toFixed(0)}</td>
         </tr>`;
       }).join("");
-
       el("tabelaMedidas").querySelector("tbody").innerHTML = linhas ||
         `<tr><td colspan="9" class="text-center text-muted py-3">Sem registros para os filtros selecionados.</td></tr>`;
     }
-
     // ===== Utilitários compartilhados (badges de status) =====
-
     function classePorStatus(status) {
       const s = normalizarTexto(status);
       if (["normal", "concluido", "realizado", "sim"].includes(s)) return "ok";
@@ -1488,7 +1413,6 @@
       if (["alterado", "cancelado", "nao"].includes(s)) return "danger";
       return "neutral";
     }
-
     function renderEmptyState(idContainer, mensagem) {
       const container = el(idContainer);
       if (!container) return;
@@ -1500,37 +1424,29 @@
           </div>
         </div>`;
     }
-
     // ===== Seção Treinos =====
-
     function filtrarTreinos() {
       let dados = filtrarDados();
       const categoria = el("filtroCategoriaTreino")?.value || "Todos";
       const status = el("filtroStatusTreino")?.value || "Todos";
-
       if (categoria !== "Todos") dados = dados.filter(x => String(valor(x, ["Categoria"])) === categoria);
       if (status === "Concluido") dados = dados.filter(x => normalizarTexto(valor(x, ["Concluído", "Concluido"])) === "sim");
       if (status === "NaoConcluido") dados = dados.filter(x => normalizarTexto(valor(x, ["Concluído", "Concluido"])) !== "sim");
-
       return dados;
     }
-
     function atualizarTreinos() {
       if (!el("kpiTreinos")) return;
-
       if (!atividades.length) {
         renderEmptyState("kpiTreinos", "Carregue a planilha Excel com a aba <strong>Atividades</strong> preenchida para ver os detalhes de treinos.");
         el("tabelaTreinos").querySelector("tbody").innerHTML = "";
         [chartMinutosAtividade, chartCaloriasCategoria].forEach(c => c && c.destroy());
         return;
       }
-
       const dados = filtrarTreinos();
       const concluidos = dados.filter(x => normalizarTexto(valor(x, ["Concluído", "Concluido"])) === "sim");
       const naoConcluidos = dados.length - concluidos.length;
       const minutosTotais = concluidos.reduce((a, b) => a + numero(b, ["Duração_min", "Duracao_min"]), 0);
       const caloriasTotais = concluidos.reduce((a, b) => a + numero(b, ["Calorias"]), 0);
-
       const contagemCategoria = {};
       concluidos.forEach(x => {
         const c = valor(x, ["Categoria"]) || "Sem categoria";
@@ -1538,7 +1454,6 @@
       });
       const topCategoriaEntry = Object.entries(contagemCategoria).sort((a, b) => b[1] - a[1])[0];
       const topCategoria = topCategoriaEntry ? `${topCategoriaEntry[0]} (${topCategoriaEntry[1]})` : "-";
-
       el("kpiTreinos").innerHTML = `
         <div class="col-sm-6 col-xl-3">
           <div class="card kpi-card p-3">
@@ -1572,14 +1487,12 @@
             </div>
           </div>
         </div>`;
-
       const minutosPorAtividade = {};
       concluidos.forEach(x => {
         const a = valor(x, ["Atividade"]) || "Outro";
         minutosPorAtividade[a] = (minutosPorAtividade[a] || 0) + numero(x, ["Duração_min", "Duracao_min"]);
       });
       const topAtividades = Object.entries(minutosPorAtividade).sort((a, b) => b[1] - a[1]).slice(0, 8);
-
       if (chartMinutosAtividade) chartMinutosAtividade.destroy();
       chartMinutosAtividade = new Chart(el("graficoMinutosAtividade"), {
         type: "bar",
@@ -1595,13 +1508,11 @@
           scales: { x: { beginAtZero: true } }
         }
       });
-
       const caloriasPorCategoria = {};
       concluidos.forEach(x => {
         const c = valor(x, ["Categoria"]) || "Sem categoria";
         caloriasPorCategoria[c] = (caloriasPorCategoria[c] || 0) + numero(x, ["Calorias"]);
       });
-
       if (chartCaloriasCategoria) chartCaloriasCategoria.destroy();
       chartCaloriasCategoria = new Chart(el("graficoCaloriasCategoria"), {
         type: "doughnut",
@@ -1614,7 +1525,6 @@
         },
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
       });
-
       const linhasOrdenadas = [...dados].sort((a, b) => new Date(valor(b, ["Data"])) - new Date(valor(a, ["Data"])));
       el("tabelaTreinos").querySelector("tbody").innerHTML = linhasOrdenadas.map(x => {
         const concluido = normalizarTexto(valor(x, ["Concluído", "Concluido"])) === "sim";
@@ -1632,38 +1542,30 @@
         </tr>`;
       }).join("") || `<tr><td colspan="9" class="text-center text-muted py-3">Sem registros para os filtros selecionados.</td></tr>`;
     }
-
     // ===== Seção Plano Semanal =====
-
     function filtrarPlano() {
       let dados = [...planoSemanal];
       const pessoa = el("filtroPessoa").value;
       const ano = el("filtroAno").value;
       const semana = el("filtroSemana")?.value || "Todos";
       const status = el("filtroStatusPlano")?.value || "Todos";
-
       if (pessoa !== "Todos") dados = dados.filter(x => String(valor(x, ["Pessoa"])) === pessoa);
       if (ano !== "Todos") dados = dados.filter(x => String(x.__dataObj.getFullYear()) === String(ano));
       if (semana !== "Todos") dados = dados.filter(x => String(chaveData(valor(x, ["Semana_Inicio"]))) === semana);
       if (status !== "Todos") dados = dados.filter(x => String(valor(x, ["Status"])) === status);
-
       return dados;
     }
-
     function atualizarPlanoSemanal() {
       if (!el("kpiPlanoSemanal")) return;
-
       if (!planoSemanal.length) {
         renderEmptyState("kpiPlanoSemanal", "Carregue a planilha Excel com a aba <strong>Plano_Semanal</strong> preenchida para ver a agenda planejada.");
         el("tabelaPlanoSemanal").querySelector("tbody").innerHTML = "";
         return;
       }
-
       const dados = filtrarPlano();
       const total = dados.length;
       const minutosPrevistos = dados.reduce((a, b) => a + numero(b, ["Duracao_Prevista_min", "Duração_Prevista_min"]), 0);
       const diasDistintos = new Set(dados.map(x => String(valor(x, ["Data"])))).size;
-
       const contagemStatus = {};
       dados.forEach(x => {
         const s = valor(x, ["Status"]) || "Sem status";
@@ -1672,7 +1574,6 @@
       const resumoStatus = Object.entries(contagemStatus)
         .map(([s, qtd]) => `<span class="status-badge ${classePorStatus(s)} me-1 mb-1">${s}: ${qtd}</span>`)
         .join("");
-
       el("kpiPlanoSemanal").innerHTML = `
         <div class="col-sm-6 col-xl-3">
           <div class="card kpi-card p-3">
@@ -1704,7 +1605,6 @@
             <div>${resumoStatus || "-"}</div>
           </div>
         </div>`;
-
       const linhasOrdenadas = [...dados].sort((a, b) => a.__dataObj - b.__dataObj);
       el("tabelaPlanoSemanal").querySelector("tbody").innerHTML = linhasOrdenadas.map(x => `
         <tr>
@@ -1720,22 +1620,18 @@
           <td class="text-muted small">${valor(x, ["Observacoes", "Observações"]) || "-"}</td>
         </tr>`).join("") || `<tr><td colspan="10" class="text-center text-muted py-3">Sem registros para os filtros selecionados.</td></tr>`;
     }
-
     // ===== Seção Metas =====
-
     function dataMaxAtividades() {
       const datas = atividades.map(x => new Date(valor(x, ["Data"]))).filter(d => !isNaN(d));
       if (!datas.length) return new Date();
       return new Date(Math.max(...datas));
     }
-
     function semanasNoAno(ano, dataReferencia) {
       const inicio = new Date(Number(ano), 0, 1);
       const fim = dataReferencia || new Date();
       const diffDias = Math.max(1, (fim - inicio) / (1000 * 60 * 60 * 24));
       return Math.max(1, diffDias / 7);
     }
-
     function calcularRealizadoCategoria(pessoa, categoria, ano) {
       const registros = atividades.filter(x =>
         String(valor(x, ["Pessoa"])) === String(pessoa) &&
@@ -1747,7 +1643,6 @@
       const minutos = registros.reduce((a, b) => a + numero(b, ["Duração_min", "Duracao_min"]), 0);
       return { dias, minutos };
     }
-
     function progressoHtml(label, atual, meta, decimais = 0) {
       const metaNum = Number(meta) || 0;
       const atualNum = Number(atual) || 0;
@@ -1759,7 +1654,6 @@
           <div class="progress" style="height:8px;"><div class="progress-bar ${cor}" style="width:${pct.toFixed(0)}%"></div></div>
         </div>`;
     }
-
     function progressoMeta(atual, meta, base) {
       if (meta === base) return atual === meta ? 100 : 0;
       if (meta < base) {
@@ -1771,7 +1665,6 @@
       if (atual <= base) return 0;
       return ((atual - base) / (meta - base)) * 100;
     }
-
     function bodyGoalBox(label, atual, metaValor, base, unidade, decimais = 1) {
       const pct = progressoMeta(atual, metaValor, base);
       const cor = pct >= 100 ? "bg-success" : pct >= 60 ? "bg-primary" : "bg-warning";
@@ -1785,10 +1678,8 @@
           </div>
         </div>`;
     }
-
     function atualizarMetas() {
       if (!el("metasContainer")) return;
-
       if (!metas.length) {
         el("metasContainer").innerHTML = `
           <div class="person-card empty-state">
@@ -1797,14 +1688,11 @@
           </div>`;
         return;
       }
-
       const pessoaFiltro = el("filtroPessoa").value;
       const anoFiltro = el("filtroAno").value;
-
       let metasFiltradas = [...metas];
       if (pessoaFiltro !== "Todos") metasFiltradas = metasFiltradas.filter(m => String(valor(m, ["Pessoa"])) === pessoaFiltro);
       if (anoFiltro !== "Todos") metasFiltradas = metasFiltradas.filter(m => String(valor(m, ["Ano"])) === anoFiltro);
-
       if (!metasFiltradas.length) {
         el("metasContainer").innerHTML = `
           <div class="person-card empty-state">
@@ -1812,45 +1700,35 @@
           </div>`;
         return;
       }
-
       const porPessoa = {};
       metasFiltradas.forEach(m => {
         const p = valor(m, ["Pessoa"]) || "Não informado";
         porPessoa[p] = porPessoa[p] || [];
         porPessoa[p].push(m);
       });
-
       const dataRef = dataMaxAtividades();
       const pessoas = Object.keys(porPessoa).sort((a, b) => a.localeCompare(b, "pt-BR"));
-
       let html = "";
       pessoas.forEach((pessoa, idx) => {
         const cor = corPessoa(pessoa, idx);
         const linhasMeta = porPessoa[pessoa];
-
         const bioRegistros = bioimpedancia
           .filter(b => String(valor(b, ["Pessoa"])) === pessoa)
           .sort((a, b) => a.__dataObj - b.__dataObj);
-
         let bodyHtml = `<p class="text-muted small mb-3"><i class="fa-solid fa-circle-info me-1"></i>Sem registros de bioimpedância para acompanhar metas de composição corporal.</p>`;
-
         if (bioRegistros.length) {
           const atualBio = bioRegistros[bioRegistros.length - 1];
           const baseBio = bioRegistros[0];
           const metaRef = linhasMeta[0];
-
           const pesoAtual = numero(atualBio, ["Peso_kg", "Peso"]);
           const pesoBase = numero(baseBio, ["Peso_kg", "Peso"]);
           const pesoMeta = numero(metaRef, ["Peso_Meta_kg"]);
-
           const gordAtual = numero(atualBio, ["Gordura_%", "Gordura"]);
           const gordBase = numero(baseBio, ["Gordura_%", "Gordura"]);
           const gordMeta = numero(metaRef, ["Gordura_Meta_%"]);
-
           const magraAtual = numero(atualBio, ["Massa_Magra_kg", "Massa_Magra"]);
           const magraBase = numero(baseBio, ["Massa_Magra_kg", "Massa_Magra"]);
           const magraMeta = numero(metaRef, ["Massa_Magra_Meta_kg"]);
-
           bodyHtml = `
             <div class="row g-2 mb-3">
               ${bodyGoalBox("Peso", pesoAtual, pesoMeta, pesoBase, " kg")}
@@ -1858,18 +1736,15 @@
               ${bodyGoalBox("Massa magra", magraAtual, magraMeta, magraBase, " kg")}
             </div>`;
         }
-
         const categoriasHtml = linhasMeta.map(m => {
           const categoria = valor(m, ["Categoria"]);
           const ano = valor(m, ["Ano"]);
           const metaDiasAno = numero(m, ["Meta_Dias_Ano"]);
           const metaMinutosSemana = numero(m, ["Meta_Minutos_Semana"]);
           const objetivo = valor(m, ["Objetivo_Principal"]) || "";
-
           const { dias, minutos } = calcularRealizadoCategoria(pessoa, categoria, ano);
           const semanas = semanasNoAno(ano, dataRef);
           const minutosSemanaMedia = minutos / semanas;
-
           return `
             <div class="meta-row">
               <div class="d-flex justify-content-between align-items-start mb-1 flex-wrap gap-1">
@@ -1880,7 +1755,6 @@
               ${progressoHtml("Minutos/semana (média)", minutosSemanaMedia, metaMinutosSemana, 0)}
             </div>`;
         }).join("");
-
         html += `
           <div class="meta-card">
             <h5><span class="avatar-dot" style="background:${cor}"></span>${pessoa}</h5>
@@ -1888,42 +1762,32 @@
             ${categoriasHtml}
           </div>`;
       });
-
       el("metasContainer").innerHTML = html;
     }
-
     // ===== Seção Exames =====
-
     function filtrarExames() {
       let dados = [...exames];
       const pessoa = el("filtroPessoa").value;
       const status = el("filtroStatusExame")?.value || "Todos";
-
       if (pessoa !== "Todos") dados = dados.filter(x => String(valor(x, ["Pessoa"])) === pessoa);
       if (status !== "Todos") dados = dados.filter(x => String(valor(x, ["Status"])) === status);
-
       return dados;
     }
-
     function atualizarExames() {
       if (!el("kpiExames")) return;
-
       if (!exames.length) {
         renderEmptyState("kpiExames", "Carregue a planilha Excel com a aba <strong>Exames</strong> preenchida para ver os resultados laboratoriais.");
         el("tabelaExames").querySelector("tbody").innerHTML = "";
         return;
       }
-
       const dados = filtrarExames();
       const total = dados.length;
       const normalCount = dados.filter(x => normalizarTexto(valor(x, ["Status"])) === "normal").length;
       const atencaoCount = dados.filter(x => normalizarTexto(valor(x, ["Status"])) === "atencao").length;
       const alteradoCount = dados.filter(x => normalizarTexto(valor(x, ["Status"])) === "alterado").length;
-
       const hoje = new Date();
       const futuras = dados.map(x => x.__revisaoObj).filter(d => !isNaN(d) && d >= hoje);
       const proxima = futuras.length ? new Date(Math.min(...futuras)) : null;
-
       el("kpiExames").innerHTML = `
         <div class="col-sm-6 col-xl-3">
           <div class="card kpi-card p-3">
@@ -1957,7 +1821,6 @@
             </div>
           </div>
         </div>`;
-
       const linhasOrdenadas = [...dados].sort((a, b) => b.__dataObj - a.__dataObj);
       el("tabelaExames").querySelector("tbody").innerHTML = linhasOrdenadas.map(x => {
         const min = valor(x, ["Referencia_Min"]);
@@ -1978,9 +1841,7 @@
         </tr>`;
       }).join("") || `<tr><td colspan="9" class="text-center text-muted py-3">Sem registros para os filtros selecionados.</td></tr>`;
     }
-
     // ===== Seção Hábitos (ranqueador + checklist com escrita direta na planilha) =====
-
     function popularFiltroDataHabitos() {
       const input = el("filtroDataHabitos");
       if (!input) return;
@@ -1992,26 +1853,22 @@
         input.value = formatarDataInput(new Date());
       }
     }
-
     function formatarDataInput(date) {
       const y = date.getFullYear();
       const m = String(date.getMonth() + 1).padStart(2, "0");
       const d = String(date.getDate()).padStart(2, "0");
       return `${y}-${m}-${d}`;
     }
-
     function parseDataInput(str) {
       if (!str) return null;
       const [y, m, d] = str.split("-").map(Number);
       const dt = new Date(y, m - 1, d);
       return isNaN(dt) ? null : dt;
     }
-
     function dataSelecionadaHabitos() {
       const d = parseDataInput(el("filtroDataHabitos")?.value);
       return d || new Date();
     }
-
     function encontrarRegistroHabito(pessoa, habito, dataObj) {
       const chave = chaveData(dataObj);
       return habitosRegistro.find(r =>
@@ -2020,18 +1877,15 @@
         chaveData(r.__dataObj) === chave
       );
     }
-
     function pessoasCatalogoHabitos() {
       const todas = [...new Set(habitosCatalogo.map(h => valor(h, ["Pessoa"])))].filter(Boolean);
       const filtro = el("filtroPessoa")?.value || "Todos";
       const lista = filtro !== "Todos" ? todas.filter(p => String(p) === filtro) : todas;
       return lista.sort((a, b) => String(a).localeCompare(String(b), "pt-BR"));
     }
-
     function habitosDaPessoa(pessoa) {
       return habitosCatalogo.filter(h => String(valor(h, ["Pessoa"])) === String(pessoa));
     }
-
     function pontosDoDia(pessoa, dataObj) {
       const habitosPessoa = habitosDaPessoa(pessoa);
       const maxPontos = habitosPessoa.reduce((a, h) => a + numero(h, ["Peso_Pontos"]), 0);
@@ -2042,7 +1896,6 @@
       });
       return { obtidos, maxPontos, pct: maxPontos > 0 ? (obtidos / maxPontos * 100) : 0 };
     }
-
     function calcularStreakHabitos(pessoa, dataReferencia) {
       const habitosPessoa = habitosDaPessoa(pessoa);
       if (!habitosPessoa.length) return 0;
@@ -2059,23 +1912,19 @@
       }
       return streak;
     }
-
     function atualizarHabitos() {
       if (!el("kpiHabitos")) return;
-
       if (!habitosCatalogo.length) {
         renderEmptyState("kpiHabitos", "Carregue a planilha Excel com as abas <strong>Habitos</strong> e <strong>Habitos_Registro</strong> preenchidas para ver o ranqueador de hábitos.");
         el("checklistHabitosContainer").innerHTML = "";
         [chartRankingHabitos, chartAderenciaHabitos].forEach(c => c && c.destroy());
         return;
       }
-
       popularFiltroDataHabitos();
       const dataRef = dataSelecionadaHabitos();
       const pessoasFiltradas = pessoasCatalogoHabitos();
       const todasPessoas = [...new Set(habitosCatalogo.map(h => valor(h, ["Pessoa"])))].filter(Boolean)
         .sort((a, b) => String(a).localeCompare(String(b), "pt-BR"));
-
       const ranking7d = todasPessoas.map(p => {
         let total = 0;
         for (let i = 0; i < 7; i++) {
@@ -2084,17 +1933,14 @@
         }
         return { pessoa: p, total };
       }).sort((a, b) => b.total - a.total);
-
       const lider = ranking7d[0];
       const pontosHoje = todasPessoas.map(p => ({ pessoa: p, ...pontosDoDia(p, dataRef) }));
       const combinadoObtidos = pontosHoje.reduce((a, p) => a + p.obtidos, 0);
       const combinadoMax = pontosHoje.reduce((a, p) => a + p.maxPontos, 0);
       const pctCombinado = combinadoMax > 0 ? (combinadoObtidos / combinadoMax * 100) : 0;
-
       const streaks = todasPessoas.map(p => ({ pessoa: p, streak: calcularStreakHabitos(p, dataRef) }))
         .sort((a, b) => b.streak - a.streak);
       const melhorStreak = streaks[0];
-
       el("kpiHabitos").innerHTML = `
         <div class="col-sm-6 col-xl-3">
           <div class="card kpi-card p-3">
@@ -2128,11 +1974,9 @@
             </div>
           </div>
         </div>`;
-
       renderizarGraficosHabitos(todasPessoas, dataRef, ranking7d);
       renderizarChecklistHabitos(pessoasFiltradas, dataRef);
     }
-
     function renderizarGraficosHabitos(todasPessoas, dataRef, ranking7d) {
       if (chartRankingHabitos) chartRankingHabitos.destroy();
       chartRankingHabitos = new Chart(el("graficoRankingHabitos"), {
@@ -2153,7 +1997,6 @@
           scales: { x: { beginAtZero: true } }
         }
       });
-
       const labels7 = [];
       const dadosPorPessoa = {};
       todasPessoas.forEach(p => dadosPorPessoa[p] = []);
@@ -2165,7 +2008,6 @@
           dadosPorPessoa[p].push(+pct.toFixed(0));
         });
       }
-
       if (chartAderenciaHabitos) chartAderenciaHabitos.destroy();
       chartAderenciaHabitos = new Chart(el("graficoAderenciaHabitos"), {
         type: "line",
@@ -2189,7 +2031,6 @@
         }
       });
     }
-
     function renderizarChecklistHabitos(pessoas, dataRef) {
       if (!pessoas.length) {
         el("checklistHabitosContainer").innerHTML = `
@@ -2200,15 +2041,12 @@
           </div>`;
         return;
       }
-
       const colClass = pessoas.length === 1 ? "col-12" : "col-lg-6";
-
       el("checklistHabitosContainer").innerHTML = pessoas.map((pessoa, idx) => {
         const cor = corPessoa(pessoa, idx);
         const habitosPessoa = habitosDaPessoa(pessoa);
         const { obtidos, maxPontos, pct } = pontosDoDia(pessoa, dataRef);
         const streak = calcularStreakHabitos(pessoa, dataRef);
-
         const itensHtml = habitosPessoa.map(h => {
           const habito = valor(h, ["Habito"]);
           const meta = numero(h, ["Meta_Diaria"]);
@@ -2229,7 +2067,6 @@
               <span class="status-badge ${marcado ? "ok" : "neutral"}">${marcado ? "Feito" : "Pendente"}</span>
             </div>`;
         }).join("");
-
         return `
         <div class="${colClass}">
           <div class="person-card">
@@ -2244,7 +2081,6 @@
           </div>
         </div>`;
       }).join("");
-
       document.querySelectorAll(".habito-checkbox").forEach(chk => {
         chk.addEventListener("change", (evento) => {
           const { pessoa, habito } = evento.target.dataset;
@@ -2252,7 +2088,6 @@
         });
       });
     }
-
     // Chamado ao marcar/desmarcar um hábito no checklist: atualiza o registro em memória,
     // re-renderiza a secao e persiste a alteracao de volta na planilha (direto no arquivo,
     // quando possivel, ou deixando pronto para download).
@@ -2261,12 +2096,10 @@
         String(valor(h, ["Pessoa"])) === String(pessoa) && String(valor(h, ["Habito"])) === String(habito)
       );
       if (!catalogoItem) return;
-
       const categoria = valor(catalogoItem, ["Categoria"]);
       const meta = numero(catalogoItem, ["Meta_Diaria"]);
       const unidade = valor(catalogoItem, ["Unidade"]);
       const peso = numero(catalogoItem, ["Peso_Pontos"]);
-
       const existente = encontrarRegistroHabito(pessoa, habito, dataObj);
       if (existente) {
         existente["Realizado"] = marcado ? "Sim" : "Nao";
@@ -2283,19 +2116,15 @@
           __dataObj: new Date(dataObj)
         });
       }
-
       atualizarHabitos();
       persistirHabitosNaPlanilha();
     }
-
     // Reconstroi a aba "Habitos_Registro" dentro do workbook em memoria a partir do array
     // `habitosRegistro`, preservando as linhas de titulo/cabecalho originais, e entao aciona
     // o salvamento (direto no arquivo via File System Access API, ou download de backup).
     function persistirHabitosNaPlanilha() {
       if (!workbookAtual) return;
-
       const colunas = ["Data", "Pessoa", "Habito", "Categoria", "Meta_Diaria", "Unidade", "Realizado", "Valor_Realizado", "Pontos_Obtidos", "Observacoes"];
-
       let linhasTopo;
       if (cabecalhoOriginalHabitosReg && cabecalhoOriginalHabitosReg.length) {
         linhasTopo = cabecalhoOriginalHabitosReg.slice(0, -1).map(l => [...l]);
@@ -2308,7 +2137,6 @@
           colunas
         ];
       }
-
       const linhasDados = [...habitosRegistro]
         .sort((a, b) =>
           a.__dataObj - b.__dataObj ||
@@ -2320,10 +2148,8 @@
           const v = valor(r, [col]);
           return v === undefined ? "" : v;
         }));
-
       const matriz = [...linhasTopo, ...linhasDados];
       const novaAba = XLSX.utils.aoa_to_sheet(matriz, { cellDates: true });
-
       // Forca explicitamente o formato de data na coluna "Data" (coluna A) das linhas de dados,
       // garantindo que apareca como data (mm-dd-yy) e nao como numero de serie no Excel.
       const linhaInicialDados = linhasTopo.length; // 0-index da primeira linha de dados na matriz
@@ -2334,21 +2160,20 @@
           novaAba[ref].z = "mm-dd-yy";
         }
       }
-
       novaAba["!cols"] = [12, 10, 18, 14, 13, 10, 12, 15, 13, 38].map(w => ({ wch: w }));
-
       workbookAtual.Sheets["Habitos_Registro"] = novaAba;
       if (!workbookAtual.SheetNames.includes("Habitos_Registro")) {
         workbookAtual.SheetNames.push("Habitos_Registro");
       }
 
+      // Atualiza o cache local com a versão mais recente da planilha (incluindo as marcações
+      // do checklist), garantindo que nada se perca mesmo sem a edição direta no arquivo.
+      salvarCacheLocal();
       salvarAlteracoesHabitos();
     }
-
     async function salvarAlteracoesHabitos() {
       const badge = el("statusSalvamentoHabitos");
       if (badge) badge.style.display = "";
-
       if (arquivoHandle) {
         const sucesso = await salvarNoArquivoOriginal();
         if (sucesso) {
@@ -2360,7 +2185,6 @@
       }
       setStatusGenerico("statusSalvamentoHabitos", "Alterações prontas - clique em 'Baixar planilha atualizada' para salvar.", "alerta");
     }
-
     // Grava o workbook (com a aba Habitos_Registro atualizada) diretamente no arquivo original,
     // usando o handle obtido via File System Access API (Chrome/Edge desktop).
     async function salvarNoArquivoOriginal() {
@@ -2383,7 +2207,6 @@
         return false;
       }
     }
-
     // Fallback universal: gera um download da planilha atualizada (funciona em qualquer navegador,
     // inclusive quando a edição direta via File System Access API não está disponível).
     function baixarPlanilhaAtualizada() {
@@ -2396,6 +2219,11 @@
       const badge = el("statusSalvamentoHabitos");
       if (badge) badge.style.display = "";
     }
+
+    // Ao abrir a página, tenta restaurar automaticamente o último arquivo carregado
+    // (salvo no navegador via localStorage), para que o usuário não precise selecionar
+    // a planilha novamente a cada visita.
+    tentarRestaurarCacheLocal();
   </script>
 </body>
 </html>
